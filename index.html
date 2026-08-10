@@ -11,12 +11,18 @@
     />
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen">
-    <!-- Top Navigation Bar -->
     <header
-      class="bg-white border-b border-gray-200 px-6 py-2.5 flex items-center justify-between sticky top-0 z-50"
+      class="bg-white border-b border-gray-200 px-4 sm:px-6 py-2.5 flex items-center justify-between sticky top-0 z-50"
     >
-      <div class="flex items-center gap-6">
-        <!-- Logo -->
+      <div class="flex items-center gap-3 sm:gap-6">
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50"
+          aria-label="Open menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
         <div class="flex items-center gap-2">
           <div
             class="bg-blue-600 text-white p-1.5 rounded-lg flex items-center justify-center"
@@ -27,56 +33,67 @@
               />
             </svg>
           </div>
-          <span class="font-bold text-lg text-gray-900">Frontpage</span>
+
+          <span class="font-bold text-lg text-gray-900"> Frontpage </span>
         </div>
 
-        <!-- Navigation Tabs -->
-        <nav class="flex items-center gap-1 text-sm font-medium">
-          <a href="#" class="px-3 py-1.5 bg-gray-100 text-gray-900 rounded-md"
-            >Feed</a
-          >
+        <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <a href="#" class="px-3 py-1.5 bg-gray-100 text-gray-900 rounded-md">
+            Feed
+          </a>
+
           <a
             href="#"
             class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md"
-            >Digest</a
           >
+            Digest
+          </a>
+
           <a
             href="#"
             class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md"
-            >Discover</a
           >
+            Discover
+          </a>
         </nav>
       </div>
 
-      <!-- Action Area -->
-      <div class="flex items-center gap-3">
-        <!-- Search Input -->
-        <div class="relative flex items-center">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden sm:flex relative items-center">
           <i
             class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 text-sm"
           ></i>
+
           <input
             id="search-input"
             type="search"
             placeholder="Search articles..."
-            class="pl-9 pr-8 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-64"
+            class="pl-9 pr-8 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-48 md:w-64"
           />
+
           <span
             class="absolute right-3 text-xs text-gray-400 font-mono bg-white border border-gray-200 rounded px-1"
-            >/</span
           >
+            /
+          </span>
         </div>
 
-        <!-- Add Button -->
+        <button
+          id="mobile-search-btn"
+          class="sm:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50"
+          aria-label="Search"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
         <button
           id="add-article-btn"
           title="Add Article"
-          class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 font-medium text-lg"
+          class="w-9 h-9 flex items-center justify-center border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 font-medium text-lg"
         >
           +
         </button>
 
-        <!-- User Profile Avatar -->
         <div
           class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-semibold text-xs border border-indigo-600"
         >
@@ -85,14 +102,46 @@
       </div>
     </header>
 
-    <!-- Main Container -->
+    <div
+      id="mobile-search-container"
+      class="hidden sm:hidden bg-white border-b border-gray-200 p-3"
+    >
+      <div class="relative flex items-center">
+        <i
+          class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 text-sm"
+        ></i>
+
+        <input
+          id="mobile-search-input"
+          type="search"
+          placeholder="Search articles..."
+          class="w-full pl-9 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+        />
+      </div>
+    </div>
+
+    <div
+      id="sidebar-overlay"
+      class="hidden fixed inset-0 bg-black/40 z-40 md:hidden"
+    ></div>
+
     <div class="flex min-h-[calc(100vh-57px)]">
-      <!-- Left Sidebar Navigation -->
       <aside
-        class="w-64 border-r border-gray-200 bg-white p-4 flex flex-col justify-between shrink-0"
+        id="sidebar"
+        class="fixed md:sticky top-[57px] left-0 z-50 md:z-auto w-72 md:w-64 h-[calc(100vh-57px)] border-r border-gray-200 bg-white p-4 flex flex-col justify-between shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto"
       >
+        <div class="md:hidden flex items-center justify-between mb-4">
+          <span class="font-semibold text-gray-900"> Menu </span>
+
+          <button
+            id="close-sidebar-btn"
+            class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-600"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
         <div class="space-y-6">
-          <!-- Main Views -->
           <div class="space-y-1">
             <a
               href="#"
@@ -103,12 +152,15 @@
                 <i class="fa-solid fa-inbox text-blue-600"></i>
                 <span>All items</span>
               </div>
+
               <span
                 id="sidebar-unread-count"
                 class="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full"
-                >47</span
               >
+                47
+              </span>
             </a>
+
             <a
               href="#"
               data-filter="saved"
@@ -118,294 +170,338 @@
                 <i class="fa-regular fa-bookmark"></i>
                 <span>Saved</span>
               </div>
-              <span id="sidebar-saved-count" class="text-xs text-gray-400"
-                >12</span
-              >
+
+              <span id="sidebar-saved-count" class="text-xs text-gray-400">
+                12
+              </span>
             </a>
           </div>
 
-          <!-- Categories List -->
           <div>
             <h4
               class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2"
             >
               Categories
             </h4>
+
             <div class="space-y-1 text-sm font-medium">
-              <!-- Frontend Group -->
               <a
                 href="#"
                 data-filter="Frontend"
-                class="sidebar-link flex items-center justify-between px-3 py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
+                class="sidebar-link flex items-center justify-between px-3 py-2 md:py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
               >
                 <div class="flex items-center gap-2.5">
                   <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                   <span>Frontend</span>
                 </div>
+
                 <span class="text-xs text-gray-400">14</span>
               </a>
+
               <a
                 href="#"
                 data-filter="CSS-Tricks"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
               >
                 <div class="flex items-center gap-2">
                   <span
-                    class="w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >C</span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-red-500 text-white text-[10px] font-bold rounded flex items-center justify-center"
                   >
+                    C
+                  </span>
+
                   <span>CSS-Tricks</span>
                 </div>
-                <span>3</span>
-              </a>
-              <a
-                href="#"
-                data-filter="Smashing Mag"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >S</span
-                  >
-                  <span>Smashing Mag</span>
-                </div>
-                <span>4</span>
-              </a>
-              <a
-                href="#"
-                data-filter="Josh Comeau"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-indigo-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >J</span
-                  >
-                  <span>Josh Comeau</span>
-                </div>
-                <span>2</span>
-              </a>
-              <a
-                href="#"
-                data-filter="Kent C. Dodds"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-blue-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >K</span
-                  >
-                  <span>Kent C. Dodds</span>
-                </div>
-                <span>2</span>
-              </a>
-              <a
-                href="#"
-                data-filter="web.dev"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-cyan-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >W</span
-                  >
-                  <span>web.dev</span>
-                </div>
+
                 <span>3</span>
               </a>
 
-              <!-- Design Group -->
+              <a
+                href="#"
+                data-filter="Smashing Mag"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-red-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    S
+                  </span>
+
+                  <span>Smashing Mag</span>
+                </div>
+
+                <span>4</span>
+              </a>
+
+              <a
+                href="#"
+                data-filter="Josh Comeau"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-indigo-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    J
+                  </span>
+
+                  <span>Josh Comeau</span>
+                </div>
+
+                <span>2</span>
+              </a>
+
+              <a
+                href="#"
+                data-filter="Kent C. Dodds"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-blue-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    K
+                  </span>
+
+                  <span>Kent C. Dodds</span>
+                </div>
+
+                <span>2</span>
+              </a>
+
+              <a
+                href="#"
+                data-filter="web.dev"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-cyan-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    W
+                  </span>
+
+                  <span>web.dev</span>
+                </div>
+
+                <span>3</span>
+              </a>
+
               <a
                 href="#"
                 data-filter="Design"
-                class="sidebar-link flex items-center justify-between px-3 py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg mt-2"
+                class="sidebar-link flex items-center justify-between px-3 py-2 md:py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg mt-2"
               >
                 <div class="flex items-center gap-2.5">
                   <span class="w-2 h-2 rounded-full bg-pink-500"></span>
                   <span>Design</span>
                 </div>
+
                 <span class="text-xs text-gray-400">11</span>
               </a>
+
               <a
                 href="#"
                 data-filter="Sidebar.io"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
               >
                 <div class="flex items-center gap-2">
                   <span
-                    class="w-4 h-4 bg-purple-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >S</span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-purple-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
                   >
+                    S
+                  </span>
+
                   <span>Sidebar.io</span>
                 </div>
+
                 <span>5</span>
               </a>
+
               <a
                 href="#"
                 data-filter="NN Group"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
               >
                 <div class="flex items-center gap-2">
                   <span
-                    class="w-4 h-4 bg-emerald-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >N</span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-emerald-600 text-white text-[10px] font-bold rounded flex items-center justify-center"
                   >
+                    N
+                  </span>
+
                   <span>NN Group</span>
                 </div>
-                <span>2</span>
-              </a>
-              <a
-                href="#"
-                data-filter="Figma Blog"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-black text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >F</span
-                  >
-                  <span>Figma Blog</span>
-                </div>
-                <span>2</span>
-              </a>
-              <a
-                href="#"
-                data-filter="UX Collective"
-                class="sidebar-link flex items-center justify-between px-5 py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
-              >
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-4 h-4 bg-blue-500 text-white text-[10px] font-bold rounded flex items-center justify-center"
-                    >U</span
-                  >
-                  <span>UX Collective</span>
-                </div>
+
                 <span>2</span>
               </a>
 
-              <!-- Other Categories -->
+              <a
+                href="#"
+                data-filter="Figma Blog"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-black text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    F
+                  </span>
+
+                  <span>Figma Blog</span>
+                </div>
+
+                <span>2</span>
+              </a>
+
+              <a
+                href="#"
+                data-filter="UX Collective"
+                class="sidebar-link flex items-center justify-between px-5 py-2 md:py-1 text-gray-500 hover:bg-gray-50 rounded-lg text-xs"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 md:w-4 md:h-4 bg-blue-500 text-white text-[10px] font-bold rounded flex items-center justify-center"
+                  >
+                    U
+                  </span>
+
+                  <span>UX Collective</span>
+                </div>
+
+                <span>2</span>
+              </a>
+
               <a
                 href="#"
                 data-filter="Backend & DevOps"
-                class="sidebar-link flex items-center justify-between px-3 py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg mt-2"
+                class="sidebar-link flex items-center justify-between px-3 py-2 md:py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg mt-2"
               >
                 <div class="flex items-center gap-2.5">
                   <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                   <span>Backend & DevOps</span>
                 </div>
+
                 <span class="text-xs text-gray-400">8</span>
               </a>
+
               <a
                 href="#"
                 data-filter="General Tech"
-                class="sidebar-link flex items-center justify-between px-3 py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
+                class="sidebar-link flex items-center justify-between px-3 py-2 md:py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
               >
                 <div class="flex items-center gap-2.5">
                   <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
                   <span>General Tech</span>
                 </div>
+
                 <span class="text-xs text-gray-400">6</span>
               </a>
+
               <a
                 href="#"
                 data-filter="AI & ML"
-                class="sidebar-link flex items-center justify-between px-3 py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
+                class="sidebar-link flex items-center justify-between px-3 py-2 md:py-1.5 text-gray-700 hover:bg-gray-50 rounded-lg"
               >
                 <div class="flex items-center gap-2.5">
                   <span class="w-2 h-2 rounded-full bg-purple-500"></span>
                   <span>AI & ML</span>
                 </div>
+
                 <span class="text-xs text-gray-400">8</span>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Sidebar Footer Status -->
         <div
-          class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs text-emerald-600 font-medium"
+          class="pt-4 mt-6 border-t border-gray-100 flex items-center gap-2 text-xs text-emerald-600 font-medium"
         >
           <i class="fa-regular fa-circle-check"></i>
           <span>All feeds healthy</span>
         </div>
       </aside>
 
-      <!-- Main Feed Content Area -->
-      <main class="flex-1 bg-white p-6 max-w-5xl">
-        <!-- Content View Header Controls -->
-        <div class="flex items-center justify-between mb-4">
+      <main class="flex-1 min-w-0 bg-white p-4 sm:p-6 max-w-5xl w-full">
+        <div
+          class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4"
+        >
           <div class="flex items-baseline gap-2">
-            <h1 class="text-2xl font-bold text-gray-900">All Items</h1>
-            <span id="unread-count" class="text-xs text-gray-400 font-medium"
-              >47 unread</span
-            >
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+              All Items
+            </h1>
+
+            <span id="unread-count" class="text-xs text-gray-400 font-medium">
+              47 unread
+            </span>
           </div>
 
-          <div class="flex items-center gap-3">
-            <!-- View Mode Switcher -->
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3">
             <div
               class="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-gray-500 text-xs"
             >
               <button
                 data-view="list"
-                class="view-mode-btn px-2 py-1 bg-white text-gray-800 rounded shadow-sm"
+                class="view-mode-btn px-2.5 py-1.5 bg-white text-gray-800 rounded shadow-sm"
                 title="List View"
               >
                 <i class="fa-solid fa-list"></i>
               </button>
+
               <button
                 data-view="grid"
-                class="view-mode-btn px-2 py-1 hover:text-gray-800"
+                class="view-mode-btn px-2.5 py-1.5 hover:text-gray-800"
                 title="Grid View"
               >
                 <i class="fa-solid fa-border-all"></i>
               </button>
+
               <button
                 data-view="compact"
-                class="view-mode-btn px-2 py-1 hover:text-gray-800"
+                class="view-mode-btn px-2.5 py-1.5 hover:text-gray-800"
                 title="Compact View"
               >
                 <i class="fa-solid fa-bars"></i>
               </button>
             </div>
 
-            <!-- Action Controls -->
             <button
               id="refresh-btn"
-              class="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-50"
+              class="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-50"
             >
-              <i class="fa-solid fa-rotate-right"></i> Refresh
+              <i class="fa-solid fa-rotate-right"></i>
+              <span class="hidden sm:inline">Refresh</span>
             </button>
+
             <button
               id="mark-all-read-btn"
-              class="px-3 py-1.5 border border-gray-200 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-50"
+              class="px-3 py-2 border border-gray-200 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-50 whitespace-nowrap"
             >
-              Mark all read
+              <span class="hidden sm:inline"> Mark all read </span>
+
+              <span class="sm:hidden"> Read all </span>
             </button>
           </div>
         </div>
 
-        <!-- Notification Banner -->
         <div
           id="new-items-banner"
-          class="bg-blue-50/60 border border-blue-100 text-blue-600 rounded-lg py-2.5 px-4 text-center text-xs font-medium mb-6 flex items-center justify-center gap-1 cursor-pointer hover:bg-blue-100/50 transition-colors"
+          class="bg-blue-50/60 border border-blue-100 text-blue-600 rounded-lg py-2.5 px-3 sm:px-4 text-center text-xs font-medium mb-5 sm:mb-6 flex items-center justify-center gap-1 cursor-pointer hover:bg-blue-100/50 transition-colors"
         >
           <i class="fa-solid fa-arrow-up text-[10px]"></i>
-          <span>5 new items since your last visit (click to load)</span>
+
+          <span> 5 new items since your last visit (click to load) </span>
         </div>
 
-        <!-- Timeline Date Separator -->
         <div
           class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4"
-        >
-          Today
-        </div>
+        ></div>
 
-        <!-- Dynamic Article Feed Container -->
         <div id="articles-container"></div>
       </main>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

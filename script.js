@@ -1,4 +1,58 @@
-// --- Initial State & Mock Data ---
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const closeBtn = document.getElementById("close-sidebar-btn");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+
+  const searchBtn = document.getElementById("mobile-search-btn");
+  const searchContainer = document.getElementById("mobile-search-container");
+
+  const desktopSearch = document.getElementById("search-input");
+  const mobileSearch = document.getElementById("mobile-search-input");
+
+  function openSidebar() {
+    sidebar.classList.remove("-translate-x-full");
+    overlay.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+    document.body.classList.remove("overflow-hidden");
+  }
+
+  menuBtn?.addEventListener("click", openSidebar);
+  closeBtn?.addEventListener("click", closeSidebar);
+  overlay?.addEventListener("click", closeSidebar);
+
+  // Close mobile sidebar after selecting a filter
+  document.querySelectorAll(".sidebar-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth < 768) {
+        closeSidebar();
+      }
+    });
+  });
+
+  // Mobile search
+  searchBtn?.addEventListener("click", () => {
+    searchContainer.classList.toggle("hidden");
+
+    if (!searchContainer.classList.contains("hidden")) {
+      mobileSearch?.focus();
+    }
+  });
+
+  // Keep mobile and desktop search synchronized
+  mobileSearch?.addEventListener("input", (e) => {
+    if (desktopSearch) {
+      desktopSearch.value = e.target.value;
+      desktopSearch.dispatchEvent(new Event("input"));
+    }
+  });
+});
+
 let articles = [
   {
     id: 1,
